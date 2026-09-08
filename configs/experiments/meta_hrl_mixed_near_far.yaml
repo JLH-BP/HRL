@@ -1,0 +1,20 @@
+# Defines the MVP experiment placeholder for six mixed near/far-field RSMA users.
+experiment_name: meta_hrl_mixed_near_far
+channel_config: configs/channel/rician_near_far.yaml
+rsma_config: configs/rsma/default.yaml
+environment_config: configs/environment/default.yaml
+training_config: configs/training/default.yaml
+meta_task_dimensions:
+  - near_far_ratio
+  - rician_k_factor
+  - path_loss_exponent
+  - noise_variance
+  - qos
+meta_splits:
+  train: task_ids_0_to_999
+  validation: task_ids_1000_to_1199
+  ood: task_ids_2000_to_2199
+meta_context:
+  encoder: deterministic_transition_statistics
+  context_dimension: 7
+  transitions_per_task: 64

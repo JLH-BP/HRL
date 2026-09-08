@@ -1,0 +1,52 @@
+文件名,相对路径,分类,英文文件头注释,英文docstring,内联英文注释,总计,优先级,主要内容摘要
+__init__.py,src/meta_hrl/__init__.py,根层级,1,1,0,2,低,包初始化和版本定义
+cli.py,src/meta_hrl/cli.py,根层级,1,3,0,4,中,CLI命令行工作流接口
+__init__.py,src/meta_hrl/agents/__init__.py,Agents,1,1,0,2,低,代理包导出
+high_level_policy.py,src/meta_hrl/agents/high_level_policy.py,Agents,1,8,0,9,最高,管理器策略:固定和启发式分区选择
+learned_context.py,src/meta_hrl/agents/learned_context.py,Agents,1,6,0,7,中高,Meta-RL上下文特征提取器
+low_level_policy.py,src/meta_hrl/agents/low_level_policy.py,Agents,1,3,0,4,中,工作者动作验证接口
+meta_context.py,src/meta_hrl/agents/meta_context.py,Agents,1,5,0,6,中高,Meta上下文编码器(转换统计)
+replay_buffer.py,src/meta_hrl/agents/replay_buffer.py,Agents,1,9,0,10,中,任务隔离转换缓冲存储
+__init__.py,src/meta_hrl/channel/__init__.py,Channel,1,1,0,2,低,信道包导出
+far_field.py,src/meta_hrl/channel/far_field.py,Channel,1,3,0,4,中,归一化远场ULA LoS导向矢量
+geometry.py,src/meta_hrl/channel/geometry.py,Channel,1,15,0,16,中高,ULA几何和近/远场分类
+near_field.py,src/meta_hrl/channel/near_field.py,Channel,1,2,1,4,中,球形波ULA LoS导向矢量
+rician.py,src/meta_hrl/channel/rician.py,Channel,1,3,1,5,中,混合近/远场Rician信道采样
+validation.py,src/meta_hrl/channel/validation.py,Channel,1,9,0,10,中,信道阵列验证和诊断
+__init__.py,src/meta_hrl/envs/__init__.py,Envs,1,2,0,3,低,环境包导出
+contextual_worker_env.py,src/meta_hrl/envs/contextual_worker_env.py,Envs,1,6,0,7,中,Worker上下文条件环境包装
+hierarchical_env.py,src/meta_hrl/envs/hierarchical_env.py,Envs,1,8,0,9,最高,分层管理器-工作者环境
+manager_training_env.py,src/meta_hrl/envs/manager_training_env.py,Envs,1,6,0,7,中高,管理器PPO训练包装器
+meta_task_sampler.py,src/meta_hrl/envs/meta_task_sampler.py,Envs,1,6,0,7,中,Meta任务分布采样
+observation_encoder.py,src/meta_hrl/envs/observation_encoder.py,Envs,1,1,0,2,低,CSI和几何观察编码
+rsma_env.py,src/meta_hrl/envs/rsma_env.py,Envs,1,10,1,12,最高,单步RSMA环境核心实现
+task_sampler.py,src/meta_hrl/envs/task_sampler.py,Envs,1,11,0,12,中高,混合场景任务采样器
+worker_training_env.py,src/meta_hrl/envs/worker_training_env.py,Envs,1,6,0,7,中,Worker PPO训练包装器
+__init__.py,src/meta_hrl/grouping/__init__.py,Grouping,1,1,0,2,低,分组包导出
+candidate_groups.py,src/meta_hrl/grouping/candidate_groups.py,Grouping,1,7,0,8,中,规范候选分区生成
+heuristic.py,src/meta_hrl/grouping/heuristic.py,Grouping,1,11,0,12,最高,混合启发式用户分组算法
+metrics.py,src/meta_hrl/grouping/metrics.py,Grouping,1,2,0,3,低,指标模块占位符
+__init__.py,src/meta_hrl/rsma/__init__.py,RSMA,1,1,0,2,低,RSMA包导出
+baselines.py,src/meta_hrl/rsma/baselines.py,RSMA,1,9,0,10,中,等功率SDMA和RSMA基线
+constraints.py,src/meta_hrl/rsma/constraints.py,RSMA,1,9,0,10,中,资源分配可行性和投影
+group_rsma.py,src/meta_hrl/rsma/group_rsma.py,RSMA,1,8,0,9,中,固定槽组RSMA资源速率
+precoding.py,src/meta_hrl/rsma/precoding.py,RSMA,1,7,0,8,中,MRT和RZF预编码器
+rate.py,src/meta_hrl/rsma/rate.py,RSMA,1,6,0,7,中,SINR谱效率和常速率诊断
+signal_model.py,src/meta_hrl/rsma/signal_model.py,RSMA,1,5,0,6,中,有效增益和SIC功率项
+__init__.py,src/meta_hrl/training/__init__.py,Training,1,2,0,3,低,训练包导出
+analyze_meta_hrl.py,src/meta_hrl/training/analyze_meta_hrl.py,Training,1,7,0,8,中,Meta-PPO后处理分析
+analyze_sensitivity_meta_hrl.py,src/meta_hrl/training/analyze_sensitivity_meta_hrl.py,Training,1,5,0,6,中,敏感性网格分析
+benchmark_meta_hrl.py,src/meta_hrl/training/benchmark_meta_hrl.py,Training,1,5,0,6,中高,多seed Meta-PPO基准
+evaluate.py,src/meta_hrl/training/evaluate.py,Training,1,8,0,9,中,Flat PPO评估工具
+evaluate_hrl.py,src/meta_hrl/training/evaluate_hrl.py,Training,1,6,0,7,中,HRL评估助手
+evaluate_meta_hrl.py,src/meta_hrl/training/evaluate_meta_hrl.py,Training,1,8,0,9,中高,Meta-RL少样本适应评估
+sensitivity_meta_hrl.py,src/meta_hrl/training/sensitivity_meta_hrl.py,Training,1,7,0,8,中,敏感性网格实验
+significance_meta_hrl.py,src/meta_hrl/training/significance_meta_hrl.py,Training,1,6,0,7,中,配对统计检验和推断
+train_flat_rl.py,src/meta_hrl/training/train_flat_rl.py,Training,1,6,0,7,中,Flat PPO基线训练
+train_hrl.py,src/meta_hrl/training/train_hrl.py,Training,1,10,0,11,中,分层HRL Worker/Manager训练
+train_meta_hrl.py,src/meta_hrl/training/train_meta_hrl.py,Training,1,11,0,12,最高,Meta-PPO主训练脚本
+__init__.py,src/meta_hrl/utils/__init__.py,Utils,1,1,0,2,低,工具包导出
+checkpoint.py,src/meta_hrl/utils/checkpoint.py,Utils,1,2,0,3,低,检查点模块占位符
+logging.py,src/meta_hrl/utils/logging.py,Utils,1,2,0,3,低,日志模块占位符
+normalization.py,src/meta_hrl/utils/normalization.py,Utils,1,2,0,3,低,归一化模块占位符
+seed.py,src/meta_hrl/utils/seed.py,Utils,1,2,0,3,低,种子模块占位符

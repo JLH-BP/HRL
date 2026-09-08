@@ -1,0 +1,40 @@
+# Configures the one-step Gymnasium RSMA resource-allocation environment.
+episode_length: 1
+high_level_interval: null
+seed: null
+perfect_csi: true
+
+action:
+  representation: logits
+  dimension: 13
+  order: [private_power_0_to_5, common_power, common_rate_0_to_5]
+  logit_bound: 20.0
+
+observation:
+  dtype: float32
+  per_user_features: 262
+  dimension: 1572
+  layout: normalized_csi_real_imag_then_log_range_angle_near_path_gain_k_factor_qos
+
+scenario:
+  users: 6
+  antennas: 128
+  angle_range_degrees: [-60.0, 60.0]
+  near_range_m: [10.0, 80.0]
+  far_range_m: [100.0, 250.0]
+  near_field_user_count_range: [0, 6]
+  k_factor_linear: 10.0
+  path_loss_exponent: 2.0
+  path_loss_reference_distance_m: 100.0
+  qos_rate_targets: [0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+
+rsma:
+  total_power: 1.0
+  noise_variance: 1.0
+  private_scheme: rzf
+
+reward:
+  objective: sum_rate_plus_fairness_minus_qos_gap
+  sum_rate_weight: 1.0
+  fairness_weight: 1.0
+  qos_gap_weight: 1.0

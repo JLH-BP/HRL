@@ -1,0 +1,27 @@
+# Defines mixed near-field and far-field Rician channel parameters
+antennas: 128
+users: 6
+array: ula
+# Carrier frequency:28GHz = 28 * 10^9 Hz.
+carrier_frequency_hz: 28000000000.0
+# ULA inter-element spacing in wavelengths:d=0.5λ.
+element_spacing_wavelengths: 0.5
+# Classify a user as near/far field using the Rayleigh distance.
+near_field_rule: rayleigh_distance
+# Rician K factor in decibels.The implementation will convert it to linear scale.(dB)
+rician_k_factor: 10
+# Large-scale path loss exponent.
+path_loss_exponent: 2.0
+# User positions are sampled in a two-dimensional polar region.
+user_dimension: 2
+angle_range_degrees: [-60.0, 60.0]
+# Initial mixed-field sampling ranges.
+near_field_distance_range_m: [10.0, 80.0]
+far_field_distance_range_m: [100.0, 250.0]
+# Number of near-field users sampled in each scenario.
+near_field_user_count_range: [0, 6] 
+# First implementation assumes ideal CSI.
+perfect_csi: true
+# Reproducible random scenario generation.
+seed: 42
+

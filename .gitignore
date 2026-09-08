@@ -1,0 +1,15 @@
+# Ignores Python caches, build artifacts, and generated experiment outputs.
+__pycache__/
+*.py[cod]
+*.so
+.venv/
+venv/
+.pytest_cache/
+.coverage
+build/
+dist/
+*.egg-info/
+
+# Ignore generated experiment outputs while retaining the directory placeholder.
+outputs/*
+!outputs/.gitkeep

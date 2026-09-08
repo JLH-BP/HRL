@@ -1,0 +1,34 @@
+# Defines META_HRL packaging, optional dependencies, and test configuration.
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "meta-hrl"
+version = "0.1.0"
+description = "META_HRL Python project"
+readme = "README.md"
+dependencies = [
+    "gymnasium>=1.0",
+    "numpy>=1.24",
+    "stable-baselines3>=2.4",
+]
+requires-python = ">=3.10"
+authors = [
+    { name = "META_HRL contributors" },
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+]
+
+[project.scripts]
+meta-hrl = "meta_hrl.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

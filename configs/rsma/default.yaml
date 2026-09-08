@@ -1,0 +1,14 @@
+# Defines normalized one-layer RSMA stream, power, and rate-allocation settings.
+architecture: one_layer_rsma
+common_streams: 1
+private_streams: 6
+total_power: 1.0
+power_unit: normalized
+action_representation: logits
+resource_projection: softmax
+noise_variance: 1.0
+noise_unit: normalized_power
+rate_unit: bit_per_s_hz
+rate_log_base: 2
+precoder: rzf
+qos_rate_targets: []

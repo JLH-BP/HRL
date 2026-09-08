@@ -1,0 +1,33 @@
+# Extends reproducible PPO settings with the staged group-RSMA Worker baseline.
+algorithm: ppo
+seed: 42
+
+general:
+  total_timesteps: 100000
+  learning_rate: 0.0003
+  n_steps: 256
+  batch_size: 64
+  n_epochs: 10
+  policy_net_arch: [256, 256]
+  checkpoint_directory: outputs/checkpoints
+  log_directory: outputs/logs
+
+flat_ppo:
+  gamma: 1.0
+  gae_lambda: 1.0
+  ent_coef: 0.0
+  vf_coef: 0.5
+  clip_range: 0.2
+  evaluation_episodes: 100
+
+staged_hrl_worker_ppo:
+  manager: heuristic
+  high_level_interval: 4
+  episode_length: 16
+  evaluation_episodes: 100
+
+staged_hrl_manager_ppo:
+  frozen_worker_checkpoint: outputs/checkpoints/staged_hrl_worker_ppo.zip
+  high_level_interval: 4
+  episode_length: 16
+  evaluation_episodes: 100
