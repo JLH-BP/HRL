@@ -13,6 +13,8 @@ from hrl.training import (
     MetaPPOSensitivityConfig,
     analyze_meta_ppo_benchmark,
     analyze_meta_ppo_sensitivity,
+    load_main_experiment_config,
+    run_main_experiments,
     analyze_meta_ppo_significance,
     run_meta_ppo_benchmark,
     run_meta_ppo_sensitivity,
@@ -41,6 +43,13 @@ def _csv_floats(value: str) -> tuple[float, ...]:
     return values
 
 
+def _csv_strings(value: str) -> tuple[str, ...]:
+    values = tuple(item.strip() for item in value.split(",") if item.strip())
+    if not values:
+        raise argparse.ArgumentTypeError("expected at least one comma-separated value")
+    return values
+
+
 def _add_common_run_options(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--seeds", type=_csv_ints, default=(11, 29, 47))
     parser.add_argument("--task-ids", type=_csv_ints, default=tuple(range(16)))
@@ -55,7 +64,7 @@ def _add_common_run_options(parser: argparse.ArgumentParser) -> None:
 
 def build_parser() -> argparse.ArgumentParser:
     """Build the CLI parser without executing a training or analysis workflow."""
-    parser = argparse.ArgumentParser(prog="meta-hrl", description="META_HRL experiment workflows")
+    parser = argparse.ArgumentParser(prog="hrl", description="HRL experiment workflows")
     commands = parser.add_subparsers(dest="command", required=True)
 
     flat_train = commands.add_parser("train-flat", help="train the Flat PPO baseline and export its evaluation curve")
@@ -108,6 +117,32 @@ def build_parser() -> argparse.ArgumentParser:
     sensitivity_analysis.add_argument("--metric", default="mean_reward")
     sensitivity_analysis.add_argument("--bootstrap-samples", type=int, default=10_000)
     sensitivity_analysis.add_argument("--seed", type=int, default=42)
+
+    main_experiments = commands.add_parser(
+        "run-main-experiments",
+        help="train/evaluate the five paired mixed-field main-experiment methods",
+    )
+    main_experiments.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/experiments/main_mixed_near_far.yaml"),
+        help="authoritative YAML experiment contract",
+    )
+    main_experiments.add_argument(
+        "--methods",
+        type=_csv_strings,
+        help="optional comma-separated subset of the five configured methods",
+    )
+    main_experiments.add_argument(
+        "--seeds",
+        type=_csv_ints,
+        help="optional comma-separated training-seed subset; held-out test seeds stay fixed",
+    )
+    main_experiments.add_argument(
+        "--output-directory",
+        type=Path,
+        help="override output_directory without changing the YAML contract",
+    )
     return parser
 
 
@@ -169,6 +204,20 @@ def main(argv: Sequence[str] | None = None) -> int:
             seed=arguments.seed,
         )
         print(result.result_path)
+    elif arguments.command == "run-main-experiments":
+        # Loading before dispatch gives a clear YAML/configuration error before
+        # any checkpoint or output directory is created.
+        config = load_main_experiment_config(arguments.config)
+        result = run_main_experiments(
+            config,
+            methods=arguments.methods,
+            seeds=arguments.seeds,
+            output_directory=arguments.output_directory,
+        )
+        print(result.manifest_path)
+        print(result.results_json_path)
+        print(result.results_csv_path)
+        print(result.significance_path)
     else:
         result = analyze_meta_ppo_sensitivity(
             arguments.sensitivity_path, output_directory=arguments.output_directory, metric=arguments.metric,
@@ -176,3 +225,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
         print(result.summary_path)
     return 0
+
+
+if __name__ == "__main__":  # pragma: no cover - exercised by the console script.
+    raise SystemExit(main())

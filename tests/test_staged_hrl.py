@@ -7,6 +7,8 @@ from hrl.agents.high_level_policy import (
     NearFieldFirstSequentialManager,
 )
 from hrl.envs.worker_training_env import WorkerTrainingEnv, partition_membership_features
+from hrl.envs.hierarchical_env import HierarchicalRSMAEnvConfig
+from hrl.envs.task_sampler import ScenarioSamplerConfig
 from hrl.grouping.candidate_groups import canonicalize_partition
 
 
@@ -45,3 +47,20 @@ def test_near_field_first_manager_runs_a_legal_worker_step() -> None:
     assert environment.observation_space.contains(next_observation)
     assert np.isfinite(reward)
     assert info["partition"] == environment.hierarchical_env.candidates[manager_index]
+
+
+def test_near_field_first_worker_wrapper_applies_alternating_service_masks() -> None:
+    config = HierarchicalRSMAEnvConfig(
+        sampler=ScenarioSamplerConfig(near_field_user_count_range=(3, 3)),
+        high_level_interval=1,
+        episode_length=3,
+    )
+    environment = WorkerTrainingEnv(config, NearFieldFirstSequentialManager())
+    _, info = environment.reset(seed=43)
+    near_mask = environment.hierarchical_env.scenario.near_field_mask
+    assert info["manager_service_mode"] == "near"
+    np.testing.assert_array_equal(info["service_mask"], near_mask)
+
+    _, _, _, _, info = environment.step(np.zeros(18, dtype=np.float32))
+    assert info["manager_service_mode"] == "far"
+    np.testing.assert_array_equal(info["service_mask"], ~near_mask)

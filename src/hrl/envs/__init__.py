@@ -1,7 +1,12 @@
 """对外导出稳定环境与采样 API"""
 
 from .contextual_worker_env import ContextualWorkerTrainingEnv
-from .hierarchical_env import HierarchicalRSMAEnv, HierarchicalRSMAEnvConfig
+from .hierarchical_env import (
+    SERVICE_MODES,
+    HierarchicalRSMAEnv,
+    HierarchicalRSMAEnvConfig,
+    ServiceMode,
+)
 from .manager_training_env import ManagerTrainingEnv
 from .meta_task_sampler import MetaTaskSampler, MetaTaskSpec
 from .rsma_env import OneStepRSMAEnv, RSMAEnvConfig, jain_fairness
@@ -18,7 +23,9 @@ __all__ = [
     "OneStepRSMAEnv",
     "RSMAEnvConfig",
     "RSMAScenario",
+    "SERVICE_MODES",
     "ScenarioSamplerConfig",
+    "ServiceMode",
     "TaskSampler",
     "WorkerTrainingEnv",
     "jain_fairness",

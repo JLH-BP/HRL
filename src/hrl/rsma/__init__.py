@@ -7,7 +7,9 @@ from .group_rsma import (
     active_group_slots,
     group_rsma_precoders,
     group_rsma_rates,
+    normalize_service_mask,
     project_group_action,
+    service_masked_partition,
 )
 
 __all__ = [
@@ -16,5 +18,7 @@ __all__ = [
     "active_group_slots",
     "group_rsma_precoders",
     "group_rsma_rates",
+    "normalize_service_mask",
     "project_group_action",
+    "service_masked_partition",
 ]

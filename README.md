@@ -33,7 +33,7 @@ This project investigates the following decision hierarchy:
 
 ```text
 Slow timescale: Manager
-  observation -> choose one of 203 canonical user partitions
+  observation -> choose (one of 203 canonical user partitions, all/near/far service mode)
 
 Fast timescale: Worker
   channel + geometry + manager partition (+ task context)
@@ -53,8 +53,9 @@ group-switching cost.
 | User region | Angles -60 to 60 degrees; near 10-80 m, far 100-250 m |
 | Base RSMA action | 13 logits: 6 private powers, 1 common power, 6 common rates |
 | Flat observation | 1,572 float32 CSI and geometry features |
+| HRL base / Worker observation | 1,596 / 1,632 float32 features |
 | HRL Worker action | 18 logits: private power, group-common power, group-common rates |
-| Manager action | 203 canonical user partitions |
+| Manager action | 609 choices: 203 partitions x `all`/`near`/`far` |
 
 The default parameters are in `configs/channel/rician_near_far.yaml`,
 `configs/rsma/default.yaml`, and `configs/environment/default.yaml`.
@@ -120,15 +121,22 @@ independently sampled channel scenario.
 `HierarchicalRSMAEnv` is the multi-step group-RSMA environment.
 
 1. Call `reset()`.
-2. The Manager selects a partition with `set_manager_action(partition_index)`.
+2. The Manager selects `(partition_index, service_mode)` with
+   `set_manager_action((partition_index, "all" | "near" | "far"))`.
 3. The Worker repeatedly calls `step(worker_action)`.
 4. After `high_level_interval` steps, the Manager can select another partition.
 
 Each non-singleton group receives a group-common stream. Stream slots are tied
 to the smallest user index in the group, so Worker action size remains fixed
-even when the selected partition changes. `WorkerTrainingEnv` trains a PPO
-Worker under fixed or heuristic grouping; `ManagerTrainingEnv` freezes that
-Worker and trains a discrete PPO Manager from interval-level returns.
+even when the selected partition changes. A `service_mask` makes every
+unscheduled user's private power, group-common power, common-rate allocation,
+and achieved rate exactly zero; unscheduled users are singleton groups. The
+base state includes last-slot rates, cumulative user rates, cumulative QoS
+gaps, and the service mask, so the cumulative episode objective is observable.
+
+The main HRL method is staged HRL: first train a Worker with random legal
+`(partition, service_mode)` choices, then freeze it and train the discrete PPO
+Manager. This is not claimed to be end-to-end joint optimization.
 
 ## Meta-PPO and task context
 
@@ -146,29 +154,53 @@ For evaluation, each requested support-episode budget rebuilds its context
 buffer independently, which prevents information leakage between adaptation
 curve points.
 
+## Main experiment
+
+The five main comparisons share the single YAML contract in
+`configs/experiments/main_mixed_near_far.yaml`: identical mixed channel
+distribution, training seeds, held-out scenarios, QoS, power/noise, episode
+clock, Worker action space/network, and reported metrics. The fixed grouping
+is explicitly `((0,1),(2,3),(4,5))`; it never uses candidate index zero.
+
+```bash
+hrl run-main-experiments \
+  --config configs/experiments/main_mixed_near_far.yaml \
+  --methods equal_power_rzf_rsma,fixed_group_ppo,near_first_ppo,heuristic_group_ppo,hrl_joint_scheduler \
+  --seeds 11,29,47,61,73,89,101,127 \
+  --output-directory outputs/main_experiment
+```
+
+The run stores the effective configuration and held-out geometries in
+`manifest.json`, per-seed evaluations and learning checkpoints, aggregate
+`summary/results.csv` and `results.json`, confidence intervals, paired
+sign-flip tests, and PNG/SVG comparison plots. `near_first_ppo` alternates
+actual near-only and far-only service masks; `hrl_joint_scheduler` chooses the
+same mask jointly with its partition.
+
 ## Command-line experiments
 
-The installed `meta-hrl` command exposes reproducible Meta-PPO workflows.
+The installed `hrl` command also exposes the existing reproducible Meta-PPO
+workflows. `meta-hrl` remains a compatibility alias.
 
 ```bash
 # Train one context-conditioned Meta-PPO Worker.
-meta-hrl train-meta --seed 42 --timesteps 100000 --output-directory outputs/meta_train
+hrl train-meta --seed 42 --timesteps 100000 --output-directory outputs/meta_train
 
 # Paired learned-context versus raw-context benchmark.
-meta-hrl benchmark --seeds 11,29,47 --timesteps 100000 --output-directory outputs/benchmark
+hrl benchmark --seeds 11,29,47 --timesteps 100000 --output-directory outputs/benchmark
 
 # Export CSV, SVG adaptation curves, and paired differences.
-meta-hrl analyze-benchmark outputs/benchmark/meta_ppo_benchmark.json
+hrl analyze-benchmark outputs/benchmark/meta_ppo_benchmark.json
 
 # Paired bootstrap confidence intervals and sign-flip tests.
-meta-hrl significance outputs/benchmark/meta_ppo_benchmark.json
+hrl significance outputs/benchmark/meta_ppo_benchmark.json
 
 # Context capacity, feature width, and OOD-shift sensitivity grid.
-meta-hrl sensitivity --context-capacities 16,64,128 --context-feature-dims 16,32,64 --ood-shift-scales 0.5,1.0,1.5
-meta-hrl analyze-sensitivity outputs/sensitivity/meta_ppo_sensitivity.json
+hrl sensitivity --context-capacities 16,64,128 --context-feature-dims 16,32,64 --ood-shift-scales 0.5,1.0,1.5
+hrl analyze-sensitivity outputs/sensitivity/meta_ppo_sensitivity.json
 ```
 
-Use `meta-hrl --help` or `meta-hrl <command> --help` to inspect all arguments.
+Use `hrl --help` or `hrl <command> --help` to inspect all arguments.
 Comma-separated lists are accepted for `--seeds`, `--task-ids`, and sweep
 parameters.
 

@@ -2,7 +2,13 @@
 import numpy as np
 import pytest
 
-from hrl.agents.high_level_policy import NearFieldFirstSequentialManager, select_partition_from_scores
+from hrl.agents.high_level_policy import (
+    ExplicitFixedPartitionManager,
+    NearFieldFirstSequentialManager,
+    RandomCompositeActionManager,
+    service_mask_for_mode,
+    select_partition_from_scores,
+)
 from hrl.agents.low_level_policy import validate_worker_action
 from hrl.envs.task_sampler import RSMAScenario
 from hrl.grouping.candidate_groups import canonicalize_partition, enumerate_candidate_partitions
@@ -62,3 +68,54 @@ def test_near_field_first_manager_handles_single_field_scenarios(
     candidates = enumerate_candidate_partitions(num_users=6)
     index = NearFieldFirstSequentialManager().select(_scenario_with_near_mask(near_mask), candidates)
     assert candidates[index] == expected_partition
+
+
+def test_explicit_fixed_partition_manager_keeps_a_multiuser_grouping() -> None:
+    candidates = enumerate_candidate_partitions(num_users=6)
+    partition = ((0, 1), (2, 3), (4, 5))
+    decision = ExplicitFixedPartitionManager(partition=partition).select(
+        _scenario_with_near_mask(np.array([True, True, True, False, False, False], dtype=np.bool_)),
+        candidates,
+    )
+
+    assert decision.partition == partition
+    assert decision.service_mode == "all"
+    assert candidates[decision.candidate_index] == partition
+
+
+def test_near_first_manager_alternates_service_modes_after_reset() -> None:
+    candidates = enumerate_candidate_partitions(num_users=6)
+    scenario = _scenario_with_near_mask(
+        np.array([True, False, True, False, False, True], dtype=np.bool_)
+    )
+    manager = NearFieldFirstSequentialManager()
+    manager.reset(seed=7)
+    near_decision = manager.select(scenario, candidates)
+    far_decision = manager.select(scenario, candidates)
+
+    assert near_decision.service_mode == "near"
+    assert far_decision.service_mode == "far"
+    np.testing.assert_array_equal(
+        service_mask_for_mode(scenario, near_decision.service_mode), scenario.near_field_mask
+    )
+    np.testing.assert_array_equal(
+        service_mask_for_mode(scenario, far_decision.service_mode), ~scenario.near_field_mask
+    )
+
+
+def test_random_composite_manager_is_seed_reproducible_and_legal() -> None:
+    candidates = enumerate_candidate_partitions(num_users=6)
+    scenario = _scenario_with_near_mask(
+        np.array([True, False, True, False, False, True], dtype=np.bool_)
+    )
+    first = RandomCompositeActionManager(seed=23)
+    second = RandomCompositeActionManager(seed=23)
+    first.reset(seed=23)
+    second.reset(seed=23)
+    sequence_one = [first.select(scenario, candidates) for _ in range(5)]
+    sequence_two = [second.select(scenario, candidates) for _ in range(5)]
+
+    assert sequence_one == sequence_two
+    for decision in sequence_one:
+        assert candidates[decision.candidate_index] == decision.partition
+        assert np.any(service_mask_for_mode(scenario, decision.service_mode))

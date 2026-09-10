@@ -63,5 +63,5 @@ def test_meta_ppo_smoke_train_and_save(tmp_path: Path) -> None:
 
     assert result.model_path.is_file()
     assert result.model.policy.features_extractor.__class__.__name__ == "ContextConditionedFeaturesExtractor"
-    action, _ = result.model.predict(np.zeros(1621, dtype=np.float32), deterministic=True)
+    action, _ = result.model.predict(np.zeros(1639, dtype=np.float32), deterministic=True)
     assert action.shape == (18,)

@@ -1,0 +1,67 @@
+# One authoritative contract for the five mixed near-/far-field RSMA comparisons.
+# CLI overrides can narrow `methods` or `seeds`, but every selected method uses
+# the exact same channel distribution, held-out scenarios and PPO Worker shape.
+experiment_name: main_mixed_near_far
+
+methods:
+  - equal_power_rzf_rsma
+  - fixed_group_ppo
+  - near_first_ppo
+  - heuristic_group_ppo
+  - hrl_joint_scheduler
+
+seeds:
+  training: [11, 29, 47, 61, 73, 89, 101, 127]
+  # These are fixed held-out channel-task seeds, shared by every method/seed.
+  test: [10011, 10029, 10047, 10061, 10073, 10089, 10101, 10127,
+         10149, 10163, 10181, 10199, 10211, 10229, 10241, 10263]
+
+environment:
+  num_users: 6
+  num_antennas: 128
+  carrier_frequency_hz: 28000000000.0
+  angle_range_degrees: [-60.0, 60.0]
+  near_range_m: [10.0, 80.0]
+  far_range_m: [100.0, 250.0]
+  # Exclude all-near/all-far tasks from the main mixed-field contract.
+  near_field_user_count_range: [1, 5]
+  k_factor_linear: 10.0
+  path_loss_exponent: 2.0
+  path_loss_reference_distance_m: 100.0
+  qos_rate_targets: [0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+  total_power: 1.0
+  noise_variance: 1.0
+  private_scheme: rzf
+  episode_length: 16
+  high_level_interval: 4
+  partition_switch_penalty: 0.05
+  sum_rate_weight: 1.0
+  fairness_weight: 1.0
+  qos_gap_weight: 1.0
+  action_logit_bound: 20.0
+
+baseline:
+  # `equal_power_rzf_rsma`: all users, equal private power/rate shares,
+  # RZF private precoding and this fixed common-stream power fraction.
+  common_power_fraction: 0.2
+
+fixed_group:
+  # This is intentionally a non-singleton paper baseline, not candidate index 0.
+  partition: [[0, 1], [2, 3], [4, 5]]
+
+training:
+  worker:
+    total_timesteps: 100000
+    learning_rate: 0.0003
+    n_steps: 256
+    batch_size: 64
+    n_epochs: 10
+    policy_net_arch: [256, 256]
+  manager:
+    total_timesteps: 100000
+
+analysis:
+  confidence_level: 0.95
+  bootstrap_samples: 10000
+  monte_carlo_permutations: 100000
+  seed: 2026

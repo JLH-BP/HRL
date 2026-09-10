@@ -22,5 +22,7 @@ def test_staged_hrl_worker_ppo_smoke_train(tmp_path: Path) -> None:
     result = train_staged_hrl_worker(config)
 
     assert result.model_path.is_file()
-    action, _ = result.model.predict(np.zeros(1614, dtype=np.float32), deterministic=True)
+    action, _ = result.model.predict(
+        np.zeros(result.model.observation_space.shape, dtype=np.float32), deterministic=True
+    )
     assert action.shape == (18,)

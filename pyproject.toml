@@ -4,13 +4,15 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "meta-hrl"
+name = "hrl"
 version = "0.1.0"
 description = "META_HRL Python project"
 readme = "README.md"
 dependencies = [
     "gymnasium>=1.0",
+    "matplotlib>=3.7",
     "numpy>=1.24",
+    "PyYAML>=6.0",
     "stable-baselines3>=2.4",
 ]
 requires-python = ">=3.10"
@@ -24,6 +26,8 @@ dev = [
 ]
 
 [project.scripts]
+hrl = "hrl.cli:main"
+# Retained so existing experiment scripts keep working after the package rename.
 meta-hrl = "hrl.cli:main"
 
 [tool.setuptools.packages.find]

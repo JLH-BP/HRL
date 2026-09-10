@@ -7,7 +7,8 @@ from hrl.training import evaluate_meta_adaptation
 
 class ZeroMetaWorker:
     def predict(self, observation: np.ndarray, deterministic: bool = True) -> tuple[np.ndarray, None]:
-        assert observation.shape == (1621,)
+        # The hierarchical base observation includes service and episode state.
+        assert observation.shape == (1639,)
         return np.zeros(18, dtype=np.float32), None
 
 
