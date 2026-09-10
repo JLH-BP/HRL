@@ -98,7 +98,7 @@ META_HRL/
 ├── docs/meta_hrl_task_framework.{md,docx}
 ├── scripts/generate_task_framework_docx.py
 ├── outputs/
-├── src/meta_hrl/
+├── src/hrl/
 │   ├── channel/{geometry,near_field,far_field,rician,validation}.py
 │   ├── rsma/{signal_model,precoding,rate,constraints,baselines}.py
 │   ├── grouping/{heuristic,candidate_groups,metrics}.py
@@ -113,7 +113,7 @@ META_HRL/
 
 ### 3.1 当前单步环境接口
 
-`meta_hrl.envs.OneStepRSMAEnv` 遵循 Gymnasium API。`reset(seed=...)` 采样一个静态混合近远场莱斯场景，返回长度为 `1572` 的 `float32` 观测；每位用户依次编码归一化 CSI 实部/虚部、`log1p` 距离、归一化角度、近场标记、路径增益、K 因子及 QoS 目标。`step()` 接收 13 维实数 logits：前 7 维通过 softmax 在 6 个私有流和 1 个公共流间分配总功率，环境据此计算物理公共率瓶颈；后 6 维再通过 softmax 分配该公共率。每回合仅一步，返回 `terminated=True`、`truncated=False`。奖励为加权和速率与 Jain 公平性减去 QoS 缺口，详细诊断通过 `info` 返回。
+`hrl.envs.OneStepRSMAEnv` 遵循 Gymnasium API。`reset(seed=...)` 采样一个静态混合近远场莱斯场景，返回长度为 `1572` 的 `float32` 观测；每位用户依次编码归一化 CSI 实部/虚部、`log1p` 距离、归一化角度、近场标记、路径增益、K 因子及 QoS 目标。`step()` 接收 13 维实数 logits：前 7 维通过 softmax 在 6 个私有流和 1 个公共流间分配总功率，环境据此计算物理公共率瓶颈；后 6 维再通过 softmax 分配该公共率。每回合仅一步，返回 `terminated=True`、`truncated=False`。奖励为加权和速率与 Jain 公平性减去 QoS 缺口，详细诊断通过 `info` 返回。
 
 ## 9. 验证
 

@@ -4,8 +4,8 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from meta_hrl.training.evaluate import evaluate_flat_policy, evaluate_physical_baselines
-from meta_hrl.training.train_flat_rl import FlatPPOConfig, train_flat_ppo
+from hrl.training.evaluate import evaluate_flat_policy, evaluate_physical_baselines
+from hrl.training.train_flat_rl import FlatPPOConfig, train_flat_ppo
 
 
 def test_physical_baseline_evaluation_is_reproducible() -> None:

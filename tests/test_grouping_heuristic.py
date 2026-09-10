@@ -2,8 +2,8 @@
 import numpy as np
 import pytest
 
-from meta_hrl.channel.geometry import ULAConfig
-from meta_hrl.grouping.heuristic import (
+from hrl.channel.geometry import ULAConfig
+from hrl.grouping.heuristic import (
     GroupingWeights,
     pairwise_grouping_affinity,
     score_partition,

@@ -2,10 +2,10 @@
 import numpy as np
 import pytest
 
-from meta_hrl.channel.far_field import ula_los_steering_vector
-from meta_hrl.channel.geometry import ULAConfig
-from meta_hrl.channel.near_field import ula_near_field_los_steering_vector
-from meta_hrl.channel.validation import (
+from hrl.channel.far_field import ula_los_steering_vector
+from hrl.channel.geometry import ULAConfig
+from hrl.channel.near_field import ula_near_field_los_steering_vector
+from hrl.channel.validation import (
     compare_near_and_far_field,
     steering_vector_norms,
     summarize_channel_diagnostics,

@@ -9,8 +9,8 @@ from numbers import Real
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
 
-from meta_hrl.channel.geometry import ULAConfig, classify_near_field
-from meta_hrl.channel.validation import user_channel_correlation_matrix
+from hrl.channel.geometry import ULAConfig, classify_near_field
+from hrl.channel.validation import user_channel_correlation_matrix
 
 from .candidate_groups import (
     DEFAULT_NUM_USERS,

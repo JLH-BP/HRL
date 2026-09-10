@@ -5,7 +5,7 @@ from types import SimpleNamespace
 
 import numpy as np
 
-from meta_hrl.training import MetaPPOBenchmarkConfig, run_meta_ppo_benchmark
+from hrl.training import MetaPPOBenchmarkConfig, run_meta_ppo_benchmark
 
 
 class ZeroMetaWorker:

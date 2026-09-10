@@ -24,7 +24,7 @@ dev = [
 ]
 
 [project.scripts]
-meta-hrl = "meta_hrl.cli:main"
+meta-hrl = "hrl.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

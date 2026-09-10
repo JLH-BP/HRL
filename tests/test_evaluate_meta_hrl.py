@@ -2,7 +2,7 @@
 import numpy as np
 import pytest
 
-from meta_hrl.training import evaluate_meta_adaptation
+from hrl.training import evaluate_meta_adaptation
 
 
 class ZeroMetaWorker:

@@ -1,8 +1,8 @@
 # Tests the fixed-length CSI and geometry observation encoder.
 import numpy as np
 
-from meta_hrl.envs.observation_encoder import encode_observation, observation_size
-from meta_hrl.envs.task_sampler import TaskSampler
+from hrl.envs.observation_encoder import encode_observation, observation_size
+from hrl.envs.task_sampler import TaskSampler
 
 
 def test_observation_encoder_returns_finite_expected_flat_shape() -> None:

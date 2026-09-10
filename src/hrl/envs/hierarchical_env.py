@@ -11,9 +11,9 @@ import gymnasium as gym
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
 
-from meta_hrl.agents.low_level_policy import validate_worker_action
-from meta_hrl.grouping.candidate_groups import UserPartition, enumerate_candidate_partitions
-from meta_hrl.rsma.group_rsma import active_group_slots, group_rsma_precoders, group_rsma_rates, project_group_action
+from hrl.agents.low_level_policy import validate_worker_action
+from hrl.grouping.candidate_groups import UserPartition, enumerate_candidate_partitions
+from hrl.rsma.group_rsma import active_group_slots, group_rsma_precoders, group_rsma_rates, project_group_action
 
 from .observation_encoder import encode_observation, observation_size
 from .rsma_env import jain_fairness

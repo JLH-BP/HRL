@@ -2,12 +2,12 @@
 import numpy as np
 import pytest
 
-from meta_hrl.rsma.baselines import (
+from hrl.rsma.baselines import (
     equal_power_mrt,
     equal_power_rzf,
     fixed_common_rsma,
 )
-from meta_hrl.rsma.rate import one_layer_rsma_rates
+from hrl.rsma.rate import one_layer_rsma_rates
 
 
 @pytest.fixture

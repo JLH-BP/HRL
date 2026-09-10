@@ -85,7 +85,7 @@ power and common-rate allocations via softmax projections.
 
 ```python
 import numpy as np
-from meta_hrl.envs import OneStepRSMAEnv
+from hrl.envs import OneStepRSMAEnv
 
 env = OneStepRSMAEnv()
 observation, info = env.reset(seed=42)
@@ -100,7 +100,7 @@ resources, SINR, common/private/user rates, fairness, QoS gap, and geometry.
 ### Flat PPO baseline
 
 ```python
-from meta_hrl.training import (
+from hrl.training import (
     FlatPPOConfig,
     evaluate_flat_policy,
     evaluate_physical_baselines,
@@ -198,7 +198,7 @@ configs/             Channel, RSMA, environment, training, experiment defaults
 docs/                Research task framework in Markdown and DOCX
 outputs/             Checkpoints, logs, benchmark results, CSV/SVG analyses
 scripts/             Documentation-generation helper
-src/meta_hrl/
+src/hrl/
   channel/           Geometry, near/far-field steering, Rician channel, checks
   rsma/              Signal model, precoding, rates, constraints, baselines
   grouping/          Candidate partitions, heuristics, grouping metrics

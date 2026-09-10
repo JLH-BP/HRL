@@ -2,10 +2,10 @@
 import numpy as np
 import pytest
 
-from meta_hrl.envs.hierarchical_env import HierarchicalRSMAEnv, HierarchicalRSMAEnvConfig
-from meta_hrl.envs.task_sampler import TaskSampler
-from meta_hrl.grouping.candidate_groups import canonicalize_partition
-from meta_hrl.rsma.group_rsma import active_group_slots, group_rsma_precoders, group_rsma_rates, project_group_action
+from hrl.envs.hierarchical_env import HierarchicalRSMAEnv, HierarchicalRSMAEnvConfig
+from hrl.envs.task_sampler import TaskSampler
+from hrl.grouping.candidate_groups import canonicalize_partition
+from hrl.rsma.group_rsma import active_group_slots, group_rsma_precoders, group_rsma_rates, project_group_action
 
 
 def test_group_slots_use_minimum_member_and_ignore_singletons() -> None:

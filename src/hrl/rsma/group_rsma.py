@@ -14,7 +14,7 @@ from numbers import Real
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
 
-from meta_hrl.grouping.candidate_groups import UserPartition, canonicalize_partition
+from hrl.grouping.candidate_groups import UserPartition, canonicalize_partition
 from .precoding import mrt_private_directions, rzf_private_directions
 
 __all__ = [

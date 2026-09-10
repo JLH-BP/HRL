@@ -2,7 +2,7 @@
 import numpy as np
 import pytest
 
-from meta_hrl.rsma.constraints import (
+from hrl.rsma.constraints import (
     ResourceAllocation,
     project_action_to_resource_allocation,
     project_nonnegative_simplex,

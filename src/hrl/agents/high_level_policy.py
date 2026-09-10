@@ -9,10 +9,10 @@ from typing import TYPE_CHECKING
 
 import numpy as np
 
-from meta_hrl.grouping.candidate_groups import UserPartition, canonicalize_partition
+from hrl.grouping.candidate_groups import UserPartition, canonicalize_partition
 
 if TYPE_CHECKING:
-    from meta_hrl.envs.task_sampler import RSMAScenario
+    from hrl.envs.task_sampler import RSMAScenario
 
 __all__ = [
     "FixedPartitionManager",
@@ -58,7 +58,7 @@ class FixedPartitionManager:
 
     def select(self, scenario: RSMAScenario, candidates: tuple[UserPartition, ...]) -> int:
         """验证场景并验证候选边界后返回固定索下。"""
-        from meta_hrl.envs.task_sampler import RSMAScenario
+        from hrl.envs.task_sampler import RSMAScenario
 
         if not isinstance(scenario, RSMAScenario):
             raise TypeError("scenario must be an RSMAScenario instance.")
@@ -77,8 +77,8 @@ class HeuristicPartitionManager:
 
     def select(self, scenario: RSMAScenario, candidates: tuple[UserPartition, ...]) -> int:
         """映射确定性启发式分区转为其候选动作索下。"""
-        from meta_hrl.envs.task_sampler import RSMAScenario
-        from meta_hrl.grouping.heuristic import select_heuristic_partition
+        from hrl.envs.task_sampler import RSMAScenario
+        from hrl.grouping.heuristic import select_heuristic_partition
 
         if not isinstance(scenario, RSMAScenario):
             raise TypeError("scenario must be an RSMAScenario instance.")
@@ -106,7 +106,7 @@ class NearFieldFirstSequentialManager:
 
     def select(self, scenario: RSMAScenario, candidates: tuple[UserPartition, ...]) -> int:
         """Map the field classification to a canonical candidate partition."""
-        from meta_hrl.envs.task_sampler import RSMAScenario
+        from hrl.envs.task_sampler import RSMAScenario
 
         if not isinstance(scenario, RSMAScenario):
             raise TypeError("scenario must be an RSMAScenario instance.")

@@ -2,7 +2,7 @@
 import numpy as np
 import pytest
 
-from meta_hrl.envs.rsma_env import OneStepRSMAEnv, jain_fairness
+from hrl.envs.rsma_env import OneStepRSMAEnv, jain_fairness
 
 
 def test_one_step_environment_returns_feasible_rate_diagnostics() -> None:

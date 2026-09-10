@@ -4,7 +4,7 @@ from collections import Counter
 import numpy as np
 import pytest
 
-from meta_hrl.grouping.candidate_groups import (
+from hrl.grouping.candidate_groups import (
     canonicalize_partition,
     enumerate_candidate_partitions,
 )

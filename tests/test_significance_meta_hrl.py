@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from meta_hrl.training import analyze_meta_ppo_significance
+from hrl.training import analyze_meta_ppo_significance
 
 
 def _payload() -> dict[str, object]:

@@ -10,8 +10,8 @@ from typing import Any
 
 import numpy as np
 
-from meta_hrl.envs import HierarchicalRSMAEnvConfig, ManagerTrainingEnv, WorkerTrainingEnv
-from meta_hrl.envs.worker_training_env import PartitionManager
+from hrl.envs import HierarchicalRSMAEnvConfig, ManagerTrainingEnv, WorkerTrainingEnv
+from hrl.envs.worker_training_env import PartitionManager
 
 __all__ = [
     "ManagerPPOConfig",

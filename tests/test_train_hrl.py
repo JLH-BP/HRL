@@ -4,7 +4,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from meta_hrl.training.train_hrl import StagedHRLConfig, train_staged_hrl_worker
+from hrl.training.train_hrl import StagedHRLConfig, train_staged_hrl_worker
 
 
 @pytest.mark.filterwarnings("ignore:.*truncated mini-batch.*")

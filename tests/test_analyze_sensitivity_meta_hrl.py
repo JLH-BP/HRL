@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from meta_hrl.training import analyze_meta_ppo_sensitivity
+from hrl.training import analyze_meta_ppo_sensitivity
 
 
 def _cell(capacity: int, width: int, shift: float, reward: float) -> dict[str, object]:

@@ -6,7 +6,7 @@ import argparse
 from pathlib import Path
 from typing import Sequence
 
-from meta_hrl.training import (
+from hrl.training import (
     FlatPPOConfig,
     MetaPPOBenchmarkConfig,
     MetaPPOConfig,

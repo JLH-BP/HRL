@@ -11,8 +11,8 @@ from typing import Any
 
 import numpy as np
 
-from meta_hrl.envs import OneStepRSMAEnv, RSMAEnvConfig
-from meta_hrl.training.evaluate import EvaluationMetrics, evaluate_flat_policy
+from hrl.envs import OneStepRSMAEnv, RSMAEnvConfig
+from hrl.training.evaluate import EvaluationMetrics, evaluate_flat_policy
 
 __all__ = ["FlatPPOConfig", "FlatPPOTrainingResult", "train_flat_ppo"]
 

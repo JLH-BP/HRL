@@ -1,8 +1,8 @@
 # Tests staged HRL Worker evaluation metrics.
 import numpy as np
 
-from meta_hrl.agents.high_level_policy import FixedPartitionManager, NearFieldFirstSequentialManager
-from meta_hrl.training.evaluate_hrl import evaluate_staged_hrl_worker
+from hrl.agents.high_level_policy import FixedPartitionManager, NearFieldFirstSequentialManager
+from hrl.training.evaluate_hrl import evaluate_staged_hrl_worker
 
 
 class ZeroWorker:

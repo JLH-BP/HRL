@@ -1,13 +1,13 @@
 # Tests staged Manager selection and the standard Worker training wrapper.
 import numpy as np
 
-from meta_hrl.agents.high_level_policy import (
+from hrl.agents.high_level_policy import (
     FixedPartitionManager,
     HeuristicPartitionManager,
     NearFieldFirstSequentialManager,
 )
-from meta_hrl.envs.worker_training_env import WorkerTrainingEnv, partition_membership_features
-from meta_hrl.grouping.candidate_groups import canonicalize_partition
+from hrl.envs.worker_training_env import WorkerTrainingEnv, partition_membership_features
+from hrl.grouping.candidate_groups import canonicalize_partition
 
 
 def test_partition_membership_features_are_symmetric() -> None:

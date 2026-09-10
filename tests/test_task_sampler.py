@@ -1,7 +1,7 @@
 # Tests reproducible mixed-field scenario sampling.
 import numpy as np
 
-from meta_hrl.envs.task_sampler import TaskSampler
+from hrl.envs.task_sampler import TaskSampler
 
 
 def test_task_sampler_seed_reproduces_complete_scenario() -> None:

@@ -4,7 +4,7 @@ import math
 import numpy as np
 import pytest
 
-from meta_hrl.channel.geometry import (
+from hrl.channel.geometry import (
     SPEED_OF_LIGHT_M_S,
     ULAConfig,
     cartesian_to_polar,

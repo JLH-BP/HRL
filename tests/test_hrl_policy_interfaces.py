@@ -2,10 +2,10 @@
 import numpy as np
 import pytest
 
-from meta_hrl.agents.high_level_policy import NearFieldFirstSequentialManager, select_partition_from_scores
-from meta_hrl.agents.low_level_policy import validate_worker_action
-from meta_hrl.envs.task_sampler import RSMAScenario
-from meta_hrl.grouping.candidate_groups import canonicalize_partition, enumerate_candidate_partitions
+from hrl.agents.high_level_policy import NearFieldFirstSequentialManager, select_partition_from_scores
+from hrl.agents.low_level_policy import validate_worker_action
+from hrl.envs.task_sampler import RSMAScenario
+from hrl.grouping.candidate_groups import canonicalize_partition, enumerate_candidate_partitions
 
 
 def test_manager_selection_is_deterministic_on_ties() -> None:

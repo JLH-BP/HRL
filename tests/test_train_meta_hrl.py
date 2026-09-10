@@ -4,7 +4,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from meta_hrl.training import MetaPPOConfig, TaskCyclingContextualWorkerEnv, train_meta_ppo
+from hrl.training import MetaPPOConfig, TaskCyclingContextualWorkerEnv, train_meta_ppo
 
 
 def test_task_cycling_environment_keeps_task_contexts_isolated() -> None:

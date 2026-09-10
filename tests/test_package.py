@@ -1,5 +1,5 @@
 # Verifies the META_HRL package exposes its declared version.
-from meta_hrl import __version__
+from hrl import __version__
 
 
 def test_version() -> None:

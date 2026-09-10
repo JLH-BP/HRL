@@ -2,7 +2,7 @@
 import json
 from pathlib import Path
 
-from meta_hrl.cli import build_parser, main
+from hrl.cli import build_parser, main
 
 
 def _benchmark_payload() -> dict[str, object]:

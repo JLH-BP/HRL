@@ -4,7 +4,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from meta_hrl.training.train_hrl import ManagerPPOConfig, train_manager_ppo
+from hrl.training.train_hrl import ManagerPPOConfig, train_manager_ppo
 
 
 class ZeroWorker:

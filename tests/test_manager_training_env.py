@@ -1,8 +1,8 @@
 # Tests high-level Manager interval rollout under a frozen Worker.
 import numpy as np
 
-from meta_hrl.envs.hierarchical_env import HierarchicalRSMAEnvConfig
-from meta_hrl.envs.manager_training_env import ManagerTrainingEnv
+from hrl.envs.hierarchical_env import HierarchicalRSMAEnvConfig
+from hrl.envs.manager_training_env import ManagerTrainingEnv
 
 
 class ZeroWorker:

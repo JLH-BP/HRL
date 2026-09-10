@@ -15,10 +15,10 @@ import gymnasium as gym
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
 
-from meta_hrl.rsma.constraints import ResourceAllocation, project_action_to_resource_allocation
-from meta_hrl.rsma.precoding import one_layer_rsma_precoders
-from meta_hrl.rsma.rate import OneLayerRSMARates, one_layer_rsma_rates
-from meta_hrl.rsma.signal_model import one_layer_rsma_signal_terms
+from hrl.rsma.constraints import ResourceAllocation, project_action_to_resource_allocation
+from hrl.rsma.precoding import one_layer_rsma_precoders
+from hrl.rsma.rate import OneLayerRSMARates, one_layer_rsma_rates
+from hrl.rsma.signal_model import one_layer_rsma_signal_terms
 
 from .observation_encoder import encode_observation, observation_size
 from .task_sampler import RSMAScenario, ScenarioSamplerConfig, TaskSampler

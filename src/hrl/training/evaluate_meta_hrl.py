@@ -8,8 +8,8 @@ from typing import Any, Protocol
 
 import numpy as np
 
-from meta_hrl.envs import ContextualWorkerTrainingEnv, HierarchicalRSMAEnvConfig
-from meta_hrl.envs.worker_training_env import PartitionManager
+from hrl.envs import ContextualWorkerTrainingEnv, HierarchicalRSMAEnvConfig
+from hrl.envs.worker_training_env import PartitionManager
 
 __all__ = [
     "MetaAdaptationPoint",

@@ -1,10 +1,10 @@
 # Tests meta-task sampling, task-isolated transition context, and conditional observations.
 import numpy as np
 
-from meta_hrl.agents.meta_context import META_CONTEXT_SIZE, MetaContextEncoder
-from meta_hrl.agents.replay_buffer import TaskContextBuffer
-from meta_hrl.envs.contextual_worker_env import ContextualWorkerTrainingEnv
-from meta_hrl.envs.meta_task_sampler import MetaTaskSampler
+from hrl.agents.meta_context import META_CONTEXT_SIZE, MetaContextEncoder
+from hrl.agents.replay_buffer import TaskContextBuffer
+from hrl.envs.contextual_worker_env import ContextualWorkerTrainingEnv
+from hrl.envs.meta_task_sampler import MetaTaskSampler
 
 
 def test_meta_task_sampling_is_reproducible_and_ood_separated() -> None:

@@ -4,8 +4,8 @@ import math
 import numpy as np
 import pytest
 
-from meta_hrl.channel.far_field import ula_los_steering_vector
-from meta_hrl.channel.geometry import ULAConfig
+from hrl.channel.far_field import ula_los_steering_vector
+from hrl.channel.geometry import ULAConfig
 
 
 def test_broadside_vector_has_uniform_phase() -> None:

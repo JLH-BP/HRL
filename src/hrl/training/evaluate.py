@@ -8,8 +8,8 @@ from typing import Any, Protocol
 
 import numpy as np
 
-from meta_hrl.envs import OneStepRSMAEnv, RSMAEnvConfig
-from meta_hrl.rsma.baselines import equal_power_rzf, fixed_common_rsma
+from hrl.envs import OneStepRSMAEnv, RSMAEnvConfig
+from hrl.rsma.baselines import equal_power_rzf, fixed_common_rsma
 
 __all__ = ["EvaluationMetrics", "evaluate_flat_policy", "evaluate_physical_baselines"]
 

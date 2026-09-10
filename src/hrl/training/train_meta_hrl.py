@@ -14,11 +14,11 @@ import gymnasium as gym
 import numpy as np
 from numpy.typing import NDArray
 
-from meta_hrl.agents.learned_context import ContextConditionedFeaturesExtractor
-from meta_hrl.agents.meta_context import MetaContextEncoder
-from meta_hrl.agents.replay_buffer import TaskContextBuffer
-from meta_hrl.envs import ContextualWorkerTrainingEnv, HierarchicalRSMAEnvConfig
-from meta_hrl.envs.worker_training_env import PartitionManager
+from hrl.agents.learned_context import ContextConditionedFeaturesExtractor
+from hrl.agents.meta_context import MetaContextEncoder
+from hrl.agents.replay_buffer import TaskContextBuffer
+from hrl.envs import ContextualWorkerTrainingEnv, HierarchicalRSMAEnvConfig
+from hrl.envs.worker_training_env import PartitionManager
 
 __all__ = [
     "MetaPPOConfig",

@@ -24,7 +24,7 @@
 | `README.md` | 已更新 | 项目概览、安装、示例、实验命令与已运行实验结论 |
 | `代码说明.md` | 已更新 | 面向首次读者的代码导读与数据流说明 |
 | `具体工作.md` | 已更新 | 面向 SCI 二区投稿的研究、实验和写作工作清单 |
-| `src/meta_hrl/cli.py` | 已实现 | `train-meta`、`benchmark`、`sensitivity`、分析和显著性命令 |
+| `src/hrl/cli.py` | 已实现 | `train-meta`、`benchmark`、`sensitivity`、分析和显著性命令 |
 | `configs/channel/rician_near_far.yaml` | 已定义 | 28 GHz、阵列、用户区域、近远场和莱斯信道设定 |
 | `configs/rsma/default.yaml` | 已定义 | 一层 RSMA 功率、噪声、预编码与动作约定 |
 | `configs/environment/default.yaml` | 已定义 | 单步环境观测、动作、场景和奖励默认值 |
@@ -34,7 +34,7 @@
 YAML 文件当前是可审阅的实验规范；训练 API 主要通过 Python dataclass 和 CLI 参数配置，
 并非自动加载全部 YAML。
 
-## 3. 信道模块：`src/meta_hrl/channel/`
+## 3. 信道模块：`src/hrl/channel/`
 
 | 文件 | 核心接口 | 作用 |
 | --- | --- | --- |
@@ -49,7 +49,7 @@ YAML 文件当前是可审阅的实验规范；训练 API 主要通过 Python da
 
 ## 4. RSMA 与分组模块
 
-### `src/meta_hrl/rsma/`
+### `src/hrl/rsma/`
 
 | 文件 | 核心接口 | 作用 |
 | --- | --- | --- |
@@ -66,7 +66,7 @@ YAML 文件当前是可审阅的实验规范；训练 API 主要通过 Python da
 | `group_rsma.py` | `active_group_slots()` | 用组内最小用户编号固定组公共流槽位 |
 | `group_rsma.py` | `group_rsma_precoders()`、`group_rsma_rates()` | 组公共流预编码与速率计算 |
 
-### `src/meta_hrl/grouping/`
+### `src/hrl/grouping/`
 
 | 文件 | 核心接口 | 作用 |
 | --- | --- | --- |
@@ -77,7 +77,7 @@ YAML 文件当前是可审阅的实验规范；训练 API 主要通过 Python da
 | `heuristic.py` | `score_partition()`、`select_heuristic_partition()` | 候选分区打分与确定性启发式选择 |
 | `metrics.py` | `pending()` | 预留的分组质量指标模块 |
 
-## 5. 场景与环境模块：`src/meta_hrl/envs/`
+## 5. 场景与环境模块：`src/hrl/envs/`
 
 | 文件 | 核心接口 | 作用 |
 | --- | --- | --- |
@@ -114,7 +114,7 @@ ContextualWorkerTrainingEnv:
 `OneStepRSMAEnv.step()` 先根据功率 logits 计算物理公共率上限，再对公共率 logits 做投影。
 因此公共率分配不会超过同一动作功率决定的可解码公共率。
 
-## 6. 智能体模块：`src/meta_hrl/agents/`
+## 6. 智能体模块：`src/hrl/agents/`
 
 | 文件 | 核心接口 | 作用 |
 | --- | --- | --- |
@@ -126,7 +126,7 @@ ContextualWorkerTrainingEnv:
 | `meta_context.py` | `META_CONTEXT_SIZE`、`MetaContextEncoder` | 从最近 transition 得到 7 维确定性任务 context |
 | `learned_context.py` | `ContextConditionedFeaturesExtractor` | 分别用 MLP 编码原始 Worker 状态和 context 的 SB3 特征提取器 |
 
-## 7. 训练、评估与分析：`src/meta_hrl/training/`
+## 7. 训练、评估与分析：`src/hrl/training/`
 
 | 文件 | 核心入口 | 作用 |
 | --- | --- | --- |
@@ -150,10 +150,10 @@ ContextualWorkerTrainingEnv:
 
 | 路径 | 状态 | 作用 |
 | --- | --- | --- |
-| `src/meta_hrl/utils/seed.py` | 骨架 | 预留跨库随机种子工具 |
-| `src/meta_hrl/utils/logging.py` | 骨架 | 预留统一日志工具 |
-| `src/meta_hrl/utils/normalization.py` | 骨架 | 预留归一化工具 |
-| `src/meta_hrl/utils/checkpoint.py` | 骨架 | 预留通用 checkpoint 工具 |
+| `src/hrl/utils/seed.py` | 骨架 | 预留跨库随机种子工具 |
+| `src/hrl/utils/logging.py` | 骨架 | 预留统一日志工具 |
+| `src/hrl/utils/normalization.py` | 骨架 | 预留归一化工具 |
+| `src/hrl/utils/checkpoint.py` | 骨架 | 预留通用 checkpoint 工具 |
 | `docs/meta_hrl_task_framework.md` | 设计文档 | 研究问题、系统模型、阶段计划和实验建议 |
 | `docs/meta_hrl_task_framework.docx` | 文档产物 | Markdown 框架文档的 Word 版本 |
 | `scripts/generate_task_framework_docx.py` | 已实现 | 生成 DOCX 文档 |

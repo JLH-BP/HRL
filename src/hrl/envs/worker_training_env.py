@@ -8,8 +8,8 @@ import gymnasium as gym
 import numpy as np
 from numpy.typing import NDArray
 
-from meta_hrl.agents.high_level_policy import FixedPartitionManager
-from meta_hrl.grouping.candidate_groups import UserPartition
+from hrl.agents.high_level_policy import FixedPartitionManager
+from hrl.grouping.candidate_groups import UserPartition
 
 from .hierarchical_env import HierarchicalRSMAEnv, HierarchicalRSMAEnvConfig
 from .task_sampler import RSMAScenario

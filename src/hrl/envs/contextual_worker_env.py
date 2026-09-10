@@ -10,10 +10,10 @@ import gymnasium as gym
 import numpy as np
 from numpy.typing import NDArray
 
-from meta_hrl.agents.meta_context import MetaContextEncoder
-from meta_hrl.agents.replay_buffer import TaskContextBuffer
-from meta_hrl.envs.hierarchical_env import HierarchicalRSMAEnvConfig
-from meta_hrl.envs.meta_task_sampler import MetaTaskSampler
+from hrl.agents.meta_context import MetaContextEncoder
+from hrl.agents.replay_buffer import TaskContextBuffer
+from hrl.envs.hierarchical_env import HierarchicalRSMAEnvConfig
+from hrl.envs.meta_task_sampler import MetaTaskSampler
 
 from .worker_training_env import PartitionManager, WorkerTrainingEnv
 

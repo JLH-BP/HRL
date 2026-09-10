@@ -2,8 +2,8 @@
 import numpy as np
 import pytest
 
-from meta_hrl.rsma.constraints import ResourceAllocation
-from meta_hrl.rsma.precoding import (
+from hrl.rsma.constraints import ResourceAllocation
+from hrl.rsma.precoding import (
     mrt_private_directions,
     normalized_channel_sum_common_direction,
     one_layer_rsma_precoders,

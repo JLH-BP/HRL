@@ -9,8 +9,8 @@ from numbers import Integral, Real
 import numpy as np
 from numpy.typing import NDArray
 
-from meta_hrl.channel.geometry import ULAConfig, classify_near_field
-from meta_hrl.channel.rician import sample_rician_channel
+from hrl.channel.geometry import ULAConfig, classify_near_field
+from hrl.channel.rician import sample_rician_channel
 
 __all__ = ["RSMAScenario", "ScenarioSamplerConfig", "TaskSampler"]   # Python 模块的公共接口声明。
 

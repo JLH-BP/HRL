@@ -5,8 +5,8 @@ import json
 
 import numpy as np
 
-from meta_hrl.envs.meta_task_sampler import MetaTaskSampler
-from meta_hrl.training import MetaPPOSensitivityConfig, run_meta_ppo_sensitivity
+from hrl.envs.meta_task_sampler import MetaTaskSampler
+from hrl.training import MetaPPOSensitivityConfig, run_meta_ppo_sensitivity
 
 
 class ZeroMetaWorker:

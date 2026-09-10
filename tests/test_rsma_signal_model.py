@@ -2,9 +2,9 @@
 import numpy as np
 import pytest
 
-from meta_hrl.rsma.constraints import ResourceAllocation
-from meta_hrl.rsma.precoding import one_layer_rsma_precoders
-from meta_hrl.rsma.signal_model import one_layer_rsma_signal_terms
+from hrl.rsma.constraints import ResourceAllocation
+from hrl.rsma.precoding import one_layer_rsma_precoders
+from hrl.rsma.signal_model import one_layer_rsma_signal_terms
 
 
 def test_signal_terms_match_manual_complex_matrix_calculation() -> None:

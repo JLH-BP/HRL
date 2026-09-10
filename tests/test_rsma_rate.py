@@ -2,10 +2,10 @@
 import numpy as np
 import pytest
 
-from meta_hrl.rsma.constraints import ResourceAllocation
-from meta_hrl.rsma.precoding import one_layer_rsma_precoders
-from meta_hrl.rsma.rate import one_layer_rsma_rates
-from meta_hrl.rsma.signal_model import (
+from hrl.rsma.constraints import ResourceAllocation
+from hrl.rsma.precoding import one_layer_rsma_precoders
+from hrl.rsma.rate import one_layer_rsma_rates
+from hrl.rsma.signal_model import (
     OneLayerRSMASignalTerms,
     one_layer_rsma_signal_terms,
 )
