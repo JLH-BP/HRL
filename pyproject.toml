@@ -1,4 +1,4 @@
-# Defines HRL packaging, optional dependencies, and test configuration.
+# 定义HRL打包、可选依赖项和测试配置。
 [build-system]
 requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
@@ -9,15 +9,15 @@ version = "0.1.0"
 description = "HRL Python project"
 readme = "README.md"
 dependencies = [
-    "gymnasium>=1.0",
-    "matplotlib>=3.7",
-    "numpy>=1.24",
-    "PyYAML>=6.0",
-    "stable-baselines3>=2.4",
+    "gymnasium>=1.0",    # 强化学习环境接口
+    "matplotlib>=3.7",   # 画图
+    "numpy>=1.24",       # 数值计算
+    "PyYAML>=6.0",       # 读 YAML 配置
+    "stable-baselines3>=2.4",  # PPO 实现
 ]
 requires-python = ">=3.10"
 authors = [
-    { name = "META_HRL contributors" },
+    { name = "HRL contributors" },
 ]
 
 [project.optional-dependencies]
@@ -25,14 +25,18 @@ dev = [
     "pytest>=8.0",
 ]
 
-[project.scripts]
+[project.scripts]  
+# 注册命令行入口。安装后会在Scripts/目录生成：D:\Anaconda\python11\Scripts\hrl.exe
+# D:\Anaconda\python11\Scripts\meta-hrl.exe   hrl.exe 内部等价于  from hrl.cli import main    main()
 hrl = "hrl.cli:main"
-# Retained so existing experiment scripts keep working after the package rename.
+# 保留了现有的实验脚本在包重命名后继续工作。
 meta-hrl = "hrl.cli:main"
 
-[tool.setuptools.packages.find]
+[tool.setuptools.packages.find]   # 告诉 setuptools “包在 src/ 目录下找”。
 where = ["src"]
 
-[tool.pytest.ini_options]
+[tool.pytest.ini_options]  
+ # testpaths = ["tests"]：只在这些目录找测试文件。
+# pythonpath = ["src"]：把 src/ 加入 sys.path，这样测试里 import hrl 能找到源码，不需要提前安装。
 testpaths = ["tests"]
 pythonpath = ["src"]

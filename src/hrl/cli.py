@@ -1,4 +1,4 @@
-"""负责 Meta-PPO 的训练、基准实验、显著性检验和敏感性分析；。"""
+"""负责 HRL 的训练、基准实验、显著性检验和敏感性分析。"""
 
 from __future__ import annotations
 
@@ -12,14 +12,14 @@ from hrl.training import (
     MetaPPOConfig,
     MetaPPOSensitivityConfig,
     analyze_meta_ppo_benchmark,
-    analyze_meta_ppo_sensitivity,
-    load_main_experiment_config,
-    run_main_experiments,
+    analyze_meta_ppo_sensitivity,  
     analyze_meta_ppo_significance,
+    run_main_experiments,
     run_meta_ppo_benchmark,
     run_meta_ppo_sensitivity,
     train_flat_ppo,
     train_meta_ppo,
+    load_main_experiment_config,
 )
 
 
@@ -147,7 +147,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: Sequence[str] | None = None) -> int:
-    """Run the selected reproducible Meta-PPO experiment command."""
+    """执行所选可重复实验命令。"""
     arguments = build_parser().parse_args(argv)
     if arguments.command == "train-flat":
         result = train_flat_ppo(FlatPPOConfig(
